@@ -4,7 +4,21 @@ tasks:
       source venv/bin/activate
       pip install --upgrade pip wheel setuptools
       pip install Django
+      pip install asgiref==3.4.1
+      pip install autopep8==1.5.7
+      pip install Django==3.2.7
+      pip install django-cors-headers==3.8.0
+      pip install djangorestframework==3.12.4
+      pip install Pillow==8.3.2
+      pip install pycodestyle==2.7.0
+      pip install pytz==2021.1
+      pip install sqlparse==0.4.2
+      pip install toml==0.10.2
+
+      python manage.py createsuperuser --username stefdelnoye --password admin#64815
+      
       python manage.py migrate
+      python manage.py makemigrations
   - command: |
       source venv/bin/activate
       python manage.py runserver
