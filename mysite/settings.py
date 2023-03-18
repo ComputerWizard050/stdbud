@@ -40,7 +40,9 @@ INSTALLED_APPS = [
     'base.apps.BaseConfig',
 ]
 
-# AUTH_USER_MODEL = 'base.User'
+AUTH_USER_MODEL = 'base.User'
+
+CSRF_TRUSTED_ORIGINS = ['https://8000-computerwizard05-stdbud-59z25hkcfb1.ws-eu90.gitpod.io']
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
