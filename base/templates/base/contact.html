@@ -1,0 +1,37 @@
+{% extends 'main.html' %} {% block content %}
+
+<main class="layout layout--3">
+  {% if message_name %}
+  <p>thanks you {{message_name}} for your message</p>
+  <p>we will soon contact you</p>
+  <p>your message:</p>
+  <p>{{message}}</p>
+  <p><a href="{% url 'home' %}">Home</a></p>
+
+  {% else %}
+  <form class="form" method="POST">
+    {% csrf_token %}
+    <input name="message_name" type="text" placeholder="subject" />
+    {% if not request.user.is_authenticated %}
+    <input name="message_email" type="email" placeholder="email" />
+    {% endif %}
+    <input name="message" type="text" placeholder="message" />
+    <button type="submit">Send</button>
+  </form>
+  {% endif %}
+</main>
+<script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"
+></script>
+
+<script text="javascript">
+  setTimeout(fade_out, 3000);
+  function fade_out() {
+    $(".messages").fadeOut().empty();
+  }
+  $(".post-form")[0].reset();
+</script>
+
+{% endblock %}

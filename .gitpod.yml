@@ -14,11 +14,14 @@ tasks:
       pip install pytz==2021.1
       pip install sqlparse==0.4.2
       pip install toml==0.10.2
-
-      python manage.py createsuperuser --username stefdelnoye --password admin#64815
+      pip install django-cors-headers
+      pip install djangorestframework
+      python manage.py makemigrations
+      python manage.py makemigrations base
       
       python manage.py migrate
-      python manage.py makemigrations
+      python manage.py createsuperuser --username stefdelnoye --email stef.delnoye@gmail.com --password admin#64815
+
   - command: |
       source venv/bin/activate
       python manage.py runserver

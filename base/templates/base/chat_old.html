@@ -1,0 +1,38 @@
+{% extends 'main.html' %} {% block content %}
+<main class="profile-page layout layout--3">
+  chatting to {{touser.email}}
+  <hr />
+  <br />
+  <br />
+  <div class="room__conversation">
+    {% for chat in allchats %}
+    <hr />
+    {% if chat.fromuser == request.user %}
+    <div>
+      <p>You</p>
+      {{chat.body}} <br />
+      <span>{{chat.created|timesince}} ago</span>
+    </div>
+
+    {% else %}
+    <div>
+      {{chat.fromuser.name}}<br />
+      {{chat.body}} <br />
+      <span>{{chat.created|timesince}} ago</span>
+    </div>
+    {% endif %}
+    <hr />
+    <br />
+    {% endfor %}
+  </div>
+  <div class="room__message">
+    <form action="" method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      <input name="body" type="text" placeholder="Write your message here..." />
+      <input name="image" type="file" />
+
+      <input type="submit" class="postMessage" value="Submit" />
+    </form>
+  </div>
+</main>
+{% endblock content %}
