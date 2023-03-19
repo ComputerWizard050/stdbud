@@ -13,7 +13,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import View
 
 
-# Create your views here.
+# Create your views 
 
 # rooms = [
 #     {'id': 1, 'name': 'Lets learn python!'},
@@ -99,7 +99,7 @@ def chats(request):
 def home(request):
     if request.user.is_authenticated and request.user.avatar == 'avatar.svg':
         messages.info(request, format_html(
-            "<a href=update-user>{}</a>", "You don't have profile image yet"))
+            "<a> href=/update-user/{}</a>", "You don't have profile image yet"))
 
     q = request.GET.get('q') if request.GET.get('q') != None else ''
 
@@ -226,6 +226,7 @@ def room(request, pk):  # hier verder met #19
 
 
 def userProfile(request, pk):
+    
     user = User.objects.get(id=pk)
     rooms = user.room_set.all()
     room_messages = user.message_set.all()
