@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
-
+import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -25,7 +25,8 @@ SECRET_KEY = 'django-insecure-!cd0v*xol@f6k=q5k1i=**i(15bpm3dka8ipdd45mk+p7it!th
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['198.211.99.20', 'localhost', '127.0.0.1','8000-computerwizard05-stdbud-lhbo9h20vyi.ws-eu117.gitpod.io']
 
 
 # Application definition
@@ -38,14 +39,15 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'base.apps.BaseConfig',
-    
     'rest_framework',
     "corsheaders",
 ]
 
 AUTH_USER_MODEL = 'base.User'
 
-CSRF_TRUSTED_ORIGINS = ['https://8000-computerwizard05-stdbud-59z25hkcfb1.ws-eu90.gitpod.io']
+
+CSRF_TRUSTED_ORIGINS = ['https://8000-computerwizard05-stdbud-lhbo9h20vyi.ws-eu117.gitpod.io']
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -128,10 +130,20 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # Ensure this directory exists
 
 STATICFILES_DIRS = [
     BASE_DIR / 'static'
 ]
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, 'static'),  # Your additional static files
+# ]
+
+STATICFILES_FINDERS = [
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+]
+
 
 MEDIA_ROOT = BASE_DIR / 'static/images'
 

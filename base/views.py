@@ -88,7 +88,7 @@ def follow(request):
 
 @login_required(login_url='login')
 def chats(request):
-    table = Hascontactwith.objects.get(user=request.user)
+    table, created = Hascontactwith.objects.get_or_create(user=request.user)
     friends = table.contactpersons.all()
 
     context = {'friends': friends}
@@ -226,14 +226,19 @@ def room(request, pk):  # hier verder met #19
 
 
 def userProfile(request, pk):
-    
     user = User.objects.get(id=pk)
     rooms = user.room_set.all()
     room_messages = user.message_set.all()
-    usercontacts = Hascontactwith.objects.get(user=request.user)
+    # Use get_or_create() to ensure a Hascontactwith instance exists
+    usercontacts, created = Hascontactwith.objects.get_or_create(user=request.user)
     topics = Topic.objects.all()
-    context = {'user': user, 'rooms': rooms,
-               'room_messages': room_messages, 'topics': topics}
+    context = {
+        'user': user,
+        'rooms': rooms,
+        'room_messages': room_messages,
+        'topics': topics,
+        'usercontacts': usercontacts,
+    }
     return render(request, 'base/profile.html', context)
 
 
